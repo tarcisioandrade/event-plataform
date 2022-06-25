@@ -1,24 +1,12 @@
-import { gql, useMutation } from "@apollo/client";
 import { useState, FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import Footer from "../components/Footer";
 import { Logo } from "../components/Logo";
-
-const CREATE_SUBSCRIBE_MUTATION = gql`
-  mutation CreateSubscriber($name: String!, $email: String!) {
-    createSubscriber(data: { name: $name, email: $email }) {
-      email
-    }
-  }
-`;
-
-const PUBLISH_SUBSCRIBE_MUTATION = gql`
-  mutation PublishSubscriber($email: String!) {
-    publishSubscriber(where: { email: $email }, to: PUBLISHED) {
-      id
-    }
-  }
-`;
+import {
+  useCreateSubscriberMutation,
+  usePublishSubscriberMutation,
+} from "../graphql/generated";
+import ReactMockup from "/src/imgs/code-mockup.png";
 
 const Subscribe = () => {
   const [name, setName] = useState("");
@@ -26,27 +14,25 @@ const Subscribe = () => {
 
   const navigate = useNavigate();
 
-  const [createSubscriber, { loading: loadingCreate }] = useMutation(
-    CREATE_SUBSCRIBE_MUTATION
-  );
+  const [createSubscriber, { loading: loadingCreate }] =
+    useCreateSubscriberMutation();
 
-  const [publishSubscriber, { loading: loadingPublish }] = useMutation(
-    PUBLISH_SUBSCRIBE_MUTATION
-  );
+  const [publishSubscriber, { loading: loadingPublish }] =
+    usePublishSubscriberMutation();
 
   const loading = loadingPublish || loadingCreate;
 
   async function handleSubscribe(e: FormEvent) {
     e.preventDefault();
 
-    const { data } = await createSubscriber({
+    const { data }: any = await createSubscriber({
       variables: {
         name,
         email,
       },
     });
 
-    const { data: dataPublish } = await publishSubscriber({
+    const { data: dataPublish }: any = await publishSubscriber({
       variables: {
         email: data.createSubscriber.email,
       },
@@ -102,7 +88,7 @@ const Subscribe = () => {
             </form>
           </div>
         </div>
-        <img src="/src/imgs/code-mockup.png" alt="mockup" className="mt-10" />
+        <img src={ReactMockup} alt="mockup" className="mt-10" />
       </div>
       <Footer />
     </div>
