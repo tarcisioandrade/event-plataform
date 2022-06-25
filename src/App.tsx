@@ -1,4 +1,4 @@
-import Router from "./Router";
+import Router from "./routes/Router";
 import { ApolloProvider } from "@apollo/client";
 import { client } from "./lib/apollo";
 import { BrowserRouter } from "react-router-dom";

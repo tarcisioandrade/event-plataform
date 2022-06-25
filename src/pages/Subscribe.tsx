@@ -6,6 +6,7 @@ import {
   useCreateSubscriberMutation,
   usePublishSubscriberMutation,
 } from "../graphql/generated";
+import { setLocalStore } from "../helper/useLocalStore";
 import ReactMockup from "/src/imgs/code-mockup.png";
 
 const Subscribe = () => {
@@ -38,7 +39,10 @@ const Subscribe = () => {
       },
     });
 
-    if (dataPublish.publishSubscriber.id) navigate("/event");
+    if (dataPublish.publishSubscriber.id) {
+      const setID = setLocalStore("id", dataPublish.publishSubscriber.id);
+      if (setID) navigate("/event");
+    }
   }
 
   return (
@@ -80,7 +84,7 @@ const Subscribe = () => {
               />
               <button
                 disabled={loading}
-                className="mt-4 bg-green-500 uppercase py-4 font-bold text-sm hover:bg-green-700 transition-colors disabled:opacity-50"
+                className="mt-4 bg-green-500 uppercase py-4 rounded font-bold text-sm hover:bg-green-700 transition-colors disabled:opacity-50"
                 type="submit"
               >
                 Garantir minha vaga
@@ -88,7 +92,7 @@ const Subscribe = () => {
             </form>
           </div>
         </div>
-        <img src={ReactMockup} alt="mockup" className="mt-10" />
+        <img src={ReactMockup} alt="mockup" className="mt-4" />
       </div>
       <Footer />
     </div>
