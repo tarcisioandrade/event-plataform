@@ -1,7 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import Subscribe from "../pages/Subscribe";
 import { Event } from "../pages/Event";
-import ProtectedRouter from "./ProtectedRouter";
+import ProtectedRouter from "./ProtectedRoute";
 
 const Router = () => {
   return (

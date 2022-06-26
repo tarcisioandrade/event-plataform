@@ -8,6 +8,7 @@ import {
 } from "../graphql/generated";
 import { setLocalStore } from "../helper/useLocalStore";
 import ReactMockup from "/src/imgs/code-mockup.png";
+import MobileReactMockup from "/src/imgs/mobile-code-mockup.png";
 
 const Subscribe = () => {
   const [name, setName] = useState("");
@@ -46,29 +47,29 @@ const Subscribe = () => {
   }
 
   return (
-    <div className="min-h-screen bg-blur bg-cover bg-no-repeat ">
+    <div className="min-h-screen bg-blur bg-cover bg-no-repeat">
       <div className="flex flex-col items-center bg-reactMockup bg-top bg-no-repeat w-full max-w-[1100px] mx-auto">
-        <div className="flex items-center justify-between mt-20 w-full">
-          <div className="max-w-[640px] ">
+        <div className="flex items-center justify-between mt-20 w-full md:flex-col">
+          <div className="max-w-[640px] md:max-w-full md:px-4 md:flex md:flex-col md:items-center md:text-center">
             <Logo />
-            <h1 className="mt-8 text-[2.5rem] leading-tight">
+            <h1 className="mt-8 text-[2.5rem] leading-tight md:text-3xl">
               Construa uma{" "}
               <strong className="text-blue-500">aplicação completa</strong>, do
               zero, com <strong className="text-blue-500">React JS</strong>
             </h1>
-            <p className="mt-4 text-gray-200 leading-relaxed">
+            <p className="mt-4 text-gray-200 leading-relaxed md:text-sm">
               Em apenas uma semana você vai dominar na prática uma das
               tecnologias mais utilizadas e com alta demanda para acessar as
               melhores oportunidades do mercado.
             </p>
           </div>
-          <div className="p-8 bg-gray-700 border border-gray-500 rounded">
+          <div className="p-8 bg-gray-700 border border-gray-500 rounded md:mt-10 sm:w-full">
             <strong className="text-2xl mb-6 block">
               Inscreva-se gratuitamente
             </strong>
             <form
               onSubmit={handleSubscribe}
-              className="flex flex-col gap-2 w-full"
+              className="flex flex-col gap-2 w-full "
             >
               <input
                 className="bg-gray-900 rounded px-5 h-14"
@@ -92,7 +93,10 @@ const Subscribe = () => {
             </form>
           </div>
         </div>
-        <img src={ReactMockup} alt="mockup" className="mt-4" />
+        <picture>
+          <source srcSet={MobileReactMockup} media="(max-width: 767px)" />
+          <img src={ReactMockup} alt="mockup" className="mt-4" />
+        </picture>
       </div>
       <Footer />
     </div>
